@@ -14,7 +14,15 @@ export default function TodoRoute() {
       <div>
         <p>
           <span className="font-bold">Item #: </span>
-          <span>{todoData?.id}</span>
+          {todoLoading && (
+            <span>Fetching todo id...</span>
+          )}
+          {todoError && (
+            <span>Failed to get todo id...</span>
+          )}
+          {todoData && (
+            <span>{todoData?.id}</span>
+          )}
         </p>
         <p>
           <span className="font-bold">Creator: </span>
@@ -31,10 +39,10 @@ export default function TodoRoute() {
         <p>
           <span className="font-bold">Title: </span>
           {todoLoading && (
-            <span>Fetching todo data...</span>
+            <span>Fetching todo title...</span>
           )}
           {todoError && (
-            <span>Failed to get todo data...</span>
+            <span>Failed to get todo title...</span>
           )}
           {todoData && (
             <span>{todoData?.title}</span>
