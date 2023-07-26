@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom';
 import './index.css'
 import App from './App';
-import Todo from './routes/Todo';
 import ErrorElement from './components/ErrorElement';
+import TodoRoute from './routes/Todo';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/todo/:id',
-    element: <Todo />,
+    element: <TodoRoute />,
     errorElement: <ErrorElement />
   }
 ]);
