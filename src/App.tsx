@@ -27,7 +27,7 @@ function App() {
       {loading && (
         <span>Loading content...</span>
       )}
-      {!error && data && (
+      {!error && !loading && data && (
         <div>
           <span>Searh by title: </span>
           <input type="search" name="search" id="search" value={searchTerm} onChange={onSearch} className="border border-zinc-600 p-2 rounded-sm outline-none" />
