@@ -1,15 +1,12 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useUser from "../hooks/useUserById";
 import { useTodoById } from "../hooks/useTodos";
 
 export default function TodoRoute() {
-  const location = useLocation();
-  const state = location.state as {
-    userId: number,
-    id: number
-  }
-  const { data: userData, loading: userLoading, error: userError } = useUser(state?.userId);
-  const { data: todoData, loading: todoLoading, error: todoError } = useTodoById(state?.id);
+  const { id } = useParams();
+  
+  const { data: todoData, loading: todoLoading, error: todoError } = useTodoById(Number(id));
+  const { data: userData, loading: userLoading, error: userError } = useUser(todoData?.userId);
 
   return (
     <section className="w-4/5 md:w-[520px] mx-auto my-10">
@@ -17,7 +14,7 @@ export default function TodoRoute() {
       <div>
         <p>
           <span className="font-bold">Item #: </span>
-          <span>{state?.id}</span>
+          <span>{todoData?.id}</span>
         </p>
         <p>
           <span className="font-bold">Creator: </span>

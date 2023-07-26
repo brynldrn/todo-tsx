@@ -11,7 +11,7 @@ const API_URL = 'https://jsonplaceholder.typicode.com';
  * @param id the user id in number format
  * @returns { data, loading, error }
  */
-export default function useUser(id: number) {
+export default function useUser(id: number | undefined) {
   const [data, setData] = useState<User | null>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -19,6 +19,7 @@ export default function useUser(id: number) {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (!id) { return }
         const controller = new AbortController();
         setLoading(true);
         

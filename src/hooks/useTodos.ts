@@ -49,7 +49,7 @@ export default function useTodos() {
  * @param id todo id
  * @returns { data, loading, error }
  */
-export const useTodoById = (id: number) => {
+export const useTodoById = (id: number | undefined) => {
   const [data, setData] = useState<Todo | null>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -57,6 +57,7 @@ export const useTodoById = (id: number) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (!id) { return; }
         const controller = new AbortController();
         setLoading(true);
         
