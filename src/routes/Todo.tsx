@@ -5,7 +5,7 @@ export default function Todo() {
   const id = params.get('id')
 
   return (
-    <section>
+    <section className="w-4/5 md:w-[520px] mx-auto my-10">
       <Link to="/">⬅️ Back</Link>
       <div>
         <span>{id}</span>

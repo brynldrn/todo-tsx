@@ -6,16 +6,19 @@ import {
 } from 'react-router-dom';
 import './index.css'
 import App from './App';
-import Todo from './routes/todo';
+import Todo from './routes/Todo';
+import ErrorElement from './components/ErrorElement';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorElement />
   },
   {
     path: '/todo/:id',
-    element: <Todo />
+    element: <Todo />,
+    errorElement: <ErrorElement />
   }
 ]);
 
