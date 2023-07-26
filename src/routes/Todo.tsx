@@ -1,13 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
-import { Todo } from "../types/Todo";
 import useUser from "../hooks/useUserById";
+import { useTodoById } from "../hooks/useTodos";
 
 export default function TodoRoute() {
-  // I pulled the data from just the state I pass for each route.
-  // I can add the API request instead if that's what you prefer.
   const location = useLocation();
-  const state = location.state as Todo;
-  const { data, loading, error } = useUser(state?.userId);
+  const state = location.state as {
+    userId: number,
+    id: number
+  }
+  const { data: userData, loading: userLoading, error: userError } = useUser(state?.userId);
+  const { data: todoData, loading: todoLoading, error: todoError } = useTodoById(state?.id);
 
   return (
     <section className="w-4/5 md:w-[520px] mx-auto my-10">
@@ -19,19 +21,27 @@ export default function TodoRoute() {
         </p>
         <p>
           <span className="font-bold">Creator: </span>
-          {loading && (
+          {userLoading && (
             <span>Fetching user info...</span>
           )}
-          {error && (
+          {userError && (
             <span>Failed to get user info...</span>
           )}
-          {data && (
-            <span>{data?.name}</span>
+          {userData && (
+            <span>{userData?.name}</span>
           )}
         </p>
         <p>
           <span className="font-bold">Title: </span>
-          <span>{state?.title}</span>
+          {todoLoading && (
+            <span>Fetching todo data...</span>
+          )}
+          {todoError && (
+            <span>Failed to get todo data...</span>
+          )}
+          {todoData && (
+            <span>{todoData?.title}</span>
+          )}
         </p>
       </div>
     </section>

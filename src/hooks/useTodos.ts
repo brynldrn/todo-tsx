@@ -42,3 +42,42 @@ export default function useTodos() {
 
   return { data, loading, error };
 }
+
+/**
+ * Custom hook for fetching todo item by ID
+ * 
+ * @param id todo id
+ * @returns { data, loading, error }
+ */
+export const useTodoById = (id: number) => {
+  const [data, setData] = useState<Todo | null>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const controller = new AbortController();
+        setLoading(true);
+        
+        const response = await fetch(`${API_URL}/todos/${id}`, {
+          signal: controller.signal
+        });
+
+        const json = await response.json();
+        
+        setData(json);
+        
+        setLoading(false);
+        
+      } catch (error: any) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
+  }, [id])
+
+  return { data, loading, error };
+}
