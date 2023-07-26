@@ -5,6 +5,11 @@ import { Todo } from "../types/Todo";
 // should be moved to .env on prod
 const API_URL = 'https://jsonplaceholder.typicode.com';
 
+/**
+ * Custom hook for fetching and storing todos
+ * 
+ * @returns { data, loading, error }
+ */
 export default function useTodos() {
   const [data, setData] = useState<Todo[] | null>([]);
   const [loading, setLoading] = useState<boolean>(true);

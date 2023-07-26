@@ -5,6 +5,12 @@ import { User } from "../types/User";
 // should be moved to .env on prod
 const API_URL = 'https://jsonplaceholder.typicode.com';
 
+/**
+ * Custom hook for fetching user by id
+ * 
+ * @param id the user id in number format
+ * @returns { data, loading, error }
+ */
 export default function useUser(id: number) {
   const [data, setData] = useState<User | null>();
   const [loading, setLoading] = useState<boolean>(true);
